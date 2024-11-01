@@ -13,10 +13,10 @@ spec:
     - probo.itsarc.me
     secretName: probo-tls
   rules:
-  - host: api.probo.itsarc.me
+  - host: probo.itsarc.me
     http:
       paths:
-      - path: /
+      - path: /server
         pathType: Prefix
         backend:
           service:
