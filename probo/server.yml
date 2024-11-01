@@ -14,7 +14,7 @@ spec:
     spec:
       containers: 
       - name: server
-        image: pawanhfl/probo_server:54fe64a
+        image: pawanhfl/probo_server:c8c1e99
         imagePullPolicy: Always
         env: 
         - name: REDIS_URL
