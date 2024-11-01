@@ -16,7 +16,7 @@ spec:
   - host: probo.itsarc.me
     http:
       paths:
-      - path: /server
+      - path: /api
         pathType: Prefix
         backend:
           service:
