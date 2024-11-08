@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gathertown-ws
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: gathertown-ws
+  template:
+    metadata:
+      labels:
+        app: gathertown-ws
+    spec: 
+      containers: 
+      - name: ws
+        image: pawanhfl/gathertown-ws:latest
+        imagePullPolicy: Always
+        volumeMounts:
+        - name: secret
+          mountPath: /usr/src/app/packages/db/.env
+          subPath: .env
+        ports:
+        - containerPort: 8080 
+      volumes:
+      - name: secret
+        secret:
+          secretName: my-secret1  
+          items:
+            - key: .env
+              path: .env
+      
+---
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: gathertown-ws
+spec:
+  selector:
+    app: gathertown-ws
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
