@@ -1,0 +1,48 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nginx
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - probo.itsarc.me
+    secretName: probo-tls # the secret created by the cert-manager
+  rules:
+  - host: probo.itsarc.me
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: probo-server
+            port:
+              number: 3000
+      - path: /socket
+        pathType: Prefix
+        backend:
+          service:
+            name: probo-ws
+            port: 
+              number: 8080
+  # - host: zep.itsarc.me
+  #   http:
+  #     paths:
+  #     - path: /api/v1
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: gathertown-server
+  #           port: 
+  #             number: 3000
+  #     - path: /socket
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: gathertown-ws
+  #           port:
+  #             number: 8080

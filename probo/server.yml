@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: server
+  name: probo-server
 spec:  
   replicas: 1
   selector:
@@ -13,7 +13,7 @@ spec:
         app: probo-server
     spec:
       containers: 
-      - name: server
+      - name: probo-server
         image: pawanhfl/probo_server:5862fe6
         imagePullPolicy: Always
         env: 
@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: server-service
+  name: probo-server
 spec:
   selector:
     app: probo-server

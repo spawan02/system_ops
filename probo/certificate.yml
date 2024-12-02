@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: probo-cert
+  namespace: default        # The namespace where you want the certificate to be created
+spec:
+  secretName: probo-tls     # The name of the secret that will be automatically created
+  issuerRef:
+    name: letsencrypt-prod  # Referencing the ClusterIssuer we created
+    kind: ClusterIssuer
+  commonName: probo.itsarc.me
+  dnsNames:
+  - probo.itsarc.me
